@@ -15,7 +15,18 @@ function iniciarJuego(){
 
     let botonTierra = document.getElementById("boton-tierra")
     botonTierra.addEventListener('click', ataqueTierra)
+
+    let botonReiniciar = document.getElementById("boton-reiniciar")
+    botonReiniciar.addEventListener('click', reiniciarJuego)
+
+    //ocultar sección seleccionar ataque
+    let sectionSeleccionarAtaque = document.getElementById("seleccionar-ataque")
+    sectionSeleccionarAtaque.style.display = 'none'
+    //ocultar sección seleccionar reinicia
+    let sectionReiniciar = document.getElementById("reiniciar")
+    sectionReiniciar.style.display = 'none'
 }
+
 
 function ataqueAleatorioEnemigo(){
     numAtaque = aleatorio(1,3)
@@ -43,13 +54,24 @@ function crearMensajeFinal(resultadoFinal){
     let parrafo = document.createElement('p')
     parrafo.innerHTML = resultadoFinal
     sectionMensaje.appendChild(parrafo) 
+
+    let botonFuego = document.getElementById("boton-fuego")
+    let botonAgua = document.getElementById("boton-agua")
+    let botonTierra = document.getElementById("boton-tierra")
+
+    botonFuego.disabled = true
+    botonAgua.disabled = true
+    botonTierra.disabled = true
+
+    let sectionReiniciar = document.getElementById("reiniciar")
+    sectionReiniciar.style.display = 'block'
+
 }
 
 function combate(){
 
     let spanVidasJugador = document.getElementById("vidas-jugador")
     let spanVidasEnemigo = document.getElementById("vidas-enemigo")
-    
 
     if(ataqueEnemigo == ataqueJugador) {
         crearMensaje("EMPATE")
@@ -136,22 +158,33 @@ function seleccionarMascotaJugador() {
 
     if(inputHipodoge.checked){
         spanMascotaJugador.innerHTML = 'HIPODOGE'
-        //alert('SELECCIONASTE TU MASCOTA HIPODOGE')
+        //alert('SELECCIONASTE TU MASCOTA HIPODOGE ')
     }
     else if(inputCapipepo.checked){
         spanMascotaJugador.innerHTML = 'CAPIPEPO'
-        //alert('SELECCIONASTE TU MASCOTA CAPIPEPO')
+        //alert('SELECCIONASTE TU MASCOTA CAPIPEPO ')
     }
     else if(inputRatigueya.checked){
         spanMascotaJugador.innerHTML = 'RATIGUEYA' 
         //alert('SELECCIONASTE TU MASCOTA RATIGUEYA')
     }
     else{
-        spanMascotaJugador.innerHTML = 'XXXX' 
-        //alert('NO SELECCIONASTE TU MASCOTA')
+        //spanMascotaJugador.innerHTML = 'XXXX' 
+        alert('NO SELECCIONASTE TU MASCOTA')
     }
     seleccionarMascotaEnemigo()
     
+    //esconder sección seleccionar mascota
+    let sectionSeleccionarMascota = document.getElementById("seleccionar-mascota")
+    sectionSeleccionarMascota.style.display = 'none'
+    //mostrar sección seleccionar ataque
+    let sectionSeleccionarAtaque = document.getElementById("seleccionar-ataque")
+    sectionSeleccionarAtaque.style.display = 'block'
+
+}
+
+function reiniciarJuego(){
+    location.reload()
 }
 
 //para que todos los elementos de HTML existan
