@@ -43,17 +43,28 @@ function ataqueAleatorioEnemigo(){
 }
 
 function crearMensaje(resultado){
-    let sectionMensaje = document.getElementById('mensajes')
-    let parrafo = document.createElement('p')
-    parrafo.innerHTML = 'Tu mascota atacó con ' + ataqueJugador +', la mascota del enemigo atacó con '+ ataqueEnemigo +', '+resultado
-    sectionMensaje.appendChild(parrafo) 
+    let sectionMensaje = document.getElementById('resultado')
+    let ataquesDelJugador = document.getElementById('ataques-del-jugador')
+    let ataquesDelEnemigo = document.getElementById('ataques-del-enemigo')
+
+    let nuevoAtaqueJugador = document.createElement('p')
+    let nuevoAtaqueEnemigo = document.createElement('p')
+
+    sectionMensaje.innerHTML = resultado
+    nuevoAtaqueJugador.innerHTML = ataqueJugador
+    nuevoAtaqueEnemigo.innerHTML = ataqueEnemigo
+
+    ataquesDelJugador.appendChild(nuevoAtaqueJugador)
+    ataquesDelEnemigo.appendChild(nuevoAtaqueEnemigo)
 }
 
 function crearMensajeFinal(resultadoFinal){
-    let sectionMensaje = document.getElementById('mensajes')
-    let parrafo = document.createElement('p')
+    let sectionMensaje = document.getElementById('resultado')
+    sectionMensaje.innerHTML = resultadoFinal
+    
+    /*let parrafo = document.createElement('p')
     parrafo.innerHTML = resultadoFinal
-    sectionMensaje.appendChild(parrafo) 
+    sectionMensaje.appendChild(parrafo) */
 
     let botonFuego = document.getElementById("boton-fuego")
     let botonAgua = document.getElementById("boton-agua")
@@ -158,7 +169,7 @@ function seleccionarMascotaJugador() {
 
     if(inputHipodoge.checked){
         spanMascotaJugador.innerHTML = 'HIPODOGE'
-        //alert('SELECCIONASTE TU MASCOTA HIPODOGE ')
+        //alert('SELECCIONASTE TU MASCOTA HIPODOGE')
     }
     else if(inputCapipepo.checked){
         spanMascotaJugador.innerHTML = 'CAPIPEPO'
@@ -174,13 +185,14 @@ function seleccionarMascotaJugador() {
     }
     seleccionarMascotaEnemigo()
     
-    //esconder sección seleccionar mascota
-    let sectionSeleccionarMascota = document.getElementById("seleccionar-mascota")
-    sectionSeleccionarMascota.style.display = 'none'
-    //mostrar sección seleccionar ataque
-    let sectionSeleccionarAtaque = document.getElementById("seleccionar-ataque")
-    sectionSeleccionarAtaque.style.display = 'block'
-
+    if(inputHipodoge.checked || inputCapipepo.checked || inputRatigueya.checked){
+        //esconder sección seleccionar mascota
+        let sectionSeleccionarMascota = document.getElementById("seleccionar-mascota")
+        sectionSeleccionarMascota.style.display = 'none'
+        //mostrar sección seleccionar ataque
+        let sectionSeleccionarAtaque = document.getElementById("seleccionar-ataque")
+        sectionSeleccionarAtaque.style.display = 'flex'
+    }
 }
 
 function reiniciarJuego(){
